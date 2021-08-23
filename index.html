@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Element Plus demo</title>
+</head>
+
+<body>
+
+    <el-container id="root">
+        <el-header>
+            <div>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <span index="1">
+                        <el-col>
+                            <el-image src="./img/video-camera.png" style="width:40px; height: 40px"></el-image>
+                            <span style="font-size: 30px"> 电影军师</span>
+                        </el-col>
+                    </span>
+
+                    <el-menu-item index="3">电影</el-menu-item>
+                </el-menu>
+            </div>
+        </el-header>
+        <el-main>
+            <el-row>
+                <el-col :span="24">
+                    <pic-carousel v-for="item in picarray" :pic-path="item.pic">
+                        
+                    </pic-carousel>
+                </el-col>
+                <el-col :span="12"><div><h3>test</h3></div></el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+</body>
+<script>
+    const app = Vue.createApp({})
+    app.use(ElementPlus).mount("#root")
+    app.component("pic-carousel", {
+        data: function(){
+            return {
+                picPath: "./carouselpic/"
+            }
+        },
+        computed: {
+
+            picarray:function() {
+                console.log("test")
+                let picArray = []
+                for (let i = 1; i < 4; i++) {
+                    picArray.push({
+                        pic: this.picPath + i.toString() + ".jpg"
+                    })
+                }
+                return picArray
+            }
+        },
+        props: ['pic-path'],
+        template: `<h1>???</h1>`
+
+    })
+</script>
+
+</html>
